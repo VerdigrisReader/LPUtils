@@ -33,7 +33,10 @@ Currently accepts two args. First arg is the index of the pattern to be run. If 
 
 ## Example Usage:
 
-
+from lputils import LaunchPadHandler
+from patterns import patterns
+lp = LaunchPadHandler()
+lp.run(patterns[0])
 
 
 ## To do:
