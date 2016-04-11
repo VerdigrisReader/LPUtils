@@ -1,3 +1,4 @@
+#!usr/bin/python
 import sys
 sys.path.append('/home/pi/python/launchpad')
 from launchpad import Launchpad
@@ -9,7 +10,8 @@ class LaunchPadHandler():
     
     """
 
-    def __init__(self, offset = (0, 1), 
+    def __init__(self, 
+                 offset = (0, 1), 
                  record_state = False, 
                  cyclic = False,
                  colorscheme=0):
@@ -42,7 +44,7 @@ class LaunchPadHandler():
         On garbage collection, reset lights
         """
         self.lp.Reset()
-        raise SystemExit
+#        raise SystemExit
     
     def _coords(self, x, y):
         return x + self.offset[0], y + self.offset[1]
@@ -95,7 +97,7 @@ class LaunchPadHandler():
         except:
             self.lp.Reset()
     
-    def get_state(x=None,y=None):
+    def get_state(self,x=None,y=None):
         if x and y:
             return self.state[x][y]
         else:
@@ -105,6 +107,8 @@ class LaunchPadHandler():
 def get_line(start, end):
     """Bresenham's Line Algorithm
     Produces a list of tuples from start and end
+    
+    stolen from online to make life easier
  
     >>> points1 = get_line((0, 0), (3, 4))
     >>> points2 = get_line((3, 4), (0, 0))

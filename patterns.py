@@ -3,7 +3,6 @@ import random
 import itertools
 import time
 from lputils import get_line
-from copy import copy
 import math
 
 def pattern1(lp):
@@ -63,7 +62,6 @@ def pattern2(lp):
 def pattern3(lp):
     def calc_groups(origin, ords):
         lx = lambda x, y: sum([abs((a-b))**1.5 for a, b in zip(*(x,y))])**0.6666
-#        lx = lambda x, y: sum([abs((a-b))**2 for a, b in zip(*(x,y))])**0.5
 
         groups = [(int(lx(origin, ord)), ord[0], ord[1]) for ord in ords]
         return sorted(groups,key=lambda x: x[0])
@@ -98,6 +96,7 @@ def pattern3(lp):
         r = None
 
 
+
 def pattern4(lp):
     ords = list(itertools.product(*[range(8)]*2))
     state = {}
@@ -105,20 +104,7 @@ def pattern4(lp):
         state[x] = random.choice([2,3,1,7,8,9])
     deltas = [x for x in itertools.product(*[range(-1,2)]*2)]
     for step in xrange(900):
-#        r = lp.recieve()
-#        if r:
-#            while new:
-#                r = new
-#                new = lp.recieve()
-#            adbrs = [(x+r[0],y+r[1]) for x,y in deltas +[(0,0)] ]
-#            for xy in adbrs:
-#                try:
-#                    state[xy] += 2
-#                    lp.send(xy[0],xy[1],state[xy])
-#                except:
-#                    pass
-            
-    
+
         pnt = random.choice(ords)
         pntval = state[pnt]
         adjs = [(x+pnt[0],y+pnt[1]) for x,y in deltas]
@@ -151,8 +137,7 @@ def pattern5(lp):
             ip =  points[pnt['in']]
             cx = (ip['x'] + 4) / 2.0
             cy = (ip['y'] + 4) / 2.0
-# 
-#            print pnt['x'], pnt['y'], pnt['dx'], pnt['dy']
+
             pnt['x'] += float(pnt['dx'])
             pnt['y'] += float(pnt['dy'])
             lp.send(int(pnt['x']),int(pnt['y']),pnt['col'])
